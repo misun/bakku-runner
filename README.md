@@ -7,6 +7,8 @@ Bakku-Runner Game of Life is a classic example of the concept of **Super Mario R
 1) bald-eagle and raccoons come out regularly,
 2) User can get scores as time goes by.  
 
+[Live Demo](http://www.misun.me/bakku-runner/)
+
 ### Functionality & MVP  
 
 With this bakku-runner Game of Life simulator, users will be able to:
