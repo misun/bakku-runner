@@ -1,0 +1,28 @@
+#############################################
+# compiled from github.com/github/gitignore #
+#############################################
+
+### Custom ###
+*.db
+*.sqlite*
+.byebug_history
+
+### OSX ###
+
+.DS_Store
+
+## Webpack:
+
+bundle.js
+bundle.js.map
+
+### Node ###
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+
+# Dependency directory
+node_modules/

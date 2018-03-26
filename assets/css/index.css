@@ -1,0 +1,13 @@
+body{
+  background: #e3e3e3;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#container{
+  /* background: url('../images/bg2.jpg');
+  background-size: cover; */
+  border: 1px solid #181818;
+
+}
