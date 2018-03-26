@@ -11,3 +11,15 @@ body{
   border: 1px solid #181818;
 
 }
+.img-dog{
+  width: 300px;
+}
+.img-racoon{
+  width: 200px;
+}
+
+.bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
