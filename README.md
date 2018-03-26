@@ -51,7 +51,7 @@ This project will be implemented with the following technologies:
 
 - Create controls for game speed, start, and reset
 - Have a styled `HTML5`, nice looking
-- If time: more styled.
+- If time: more styled
 
 
 ### Bonus features
