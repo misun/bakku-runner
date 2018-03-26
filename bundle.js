@@ -74,6 +74,7 @@ const random = (min, max) => {
 }
 /* harmony export (immutable) */ __webpack_exports__["random"] = random;
 
+
 const randomColor = (array) => {
     return array[Math.round(random(0, array.length -1 ))];
 }
@@ -101,39 +102,42 @@ class Vector{
     this.prevY = 0;
     this.setPos(options.x, options.y);
   }
+
   setPos(x, y){
     this.prevX = this.x;
     this.prevY = this.y;
     this.x = x;
     this.y = y;
   }
+
   setX(x){
     this.prevX = this.x;
     this.x = x;
   }
+
   setY(y){
     this.prevY = this.y;
     this.y = y;
   }
+
   isCollidedWith(otherObject) {
     if (this.x < otherObject.x + otherObject.width &&
      this.x + this.width > otherObject.x &&
      this.y < otherObject.y + otherObject.height &&
      this.height + this.y > otherObject.y) {
-      // collision detected!
       // console.log(`collision detected!!`);
-      // console.log(this);
-      // console.log(otherObject);
       return true;
     }
     return false;
   }
+
   isCollidedWithLeft(obj){
     if (obj.x < this.x + this.width && obj.y < this.y + this.height) {
       return true;
     }
     return false;
   }
+
 }
 /* harmony export (immutable) */ __webpack_exports__["Vector"] = Vector;
 ;
@@ -181,6 +185,7 @@ class Player extends Vector{
     this.image.src = options.src;
     this.spriteSpeed = 0;
   }
+
   updateStatus(){
     this.velocityY += 1;
     this.setPos(this.x + this.velocityX, this.y + this.velocityY);
@@ -203,6 +208,7 @@ class Player extends Vector{
 
     this.spriteSpeed += 0.2;
   }
+  
   draw(ctx) {
     const spriteIndex = parseInt(this.spriteSpeed) % DOG_SPRITES.length;
     const srcPlayerWidth = 141, srcPlayerHeight = 73;
@@ -270,6 +276,7 @@ class PlatformManager{
 
     this.racoon = options.racoon;
   }
+
   draw(ctx){
     this.racoon.draw(ctx);
     for (let i = 0; i < this.platforms.length; i++) {
@@ -278,6 +285,7 @@ class PlatformManager{
       this.platforms[i].draw(ctx);
     };
   }
+
   updateStatus(){
     this.first.x -= 3 + this.aceleration;
     if (this.first.x + this.first.width < 0) {
@@ -313,6 +321,7 @@ class PlatformManager{
     });
 
   }
+  
   updateWhenLose(){
     this.first.x = 300;
     this.first.color = randomColor(this.colors);
@@ -348,11 +357,13 @@ class Racoon extends Vector{
     this.spriteSpeed = 0;
 
   }
+
   updateStatus(options={}){
     this.x = options.x;
     this.y = options.y - this.height;
     this.spriteSpeed += 0.05;
   }
+
   draw(ctx) {
     const spriteIndex = parseInt(this.spriteSpeed) % RACCOON_SPRITES.length;
     const sprite = RACCOON_SPRITES[spriteIndex];
@@ -364,6 +375,7 @@ class Racoon extends Vector{
       this.x, this.y -10 ,
       this.drawingWidth , this.drawingHeight);
   }
+
 }
 
 module.exports = Racoon;
@@ -406,12 +418,14 @@ class Platform extends Vector{
     this.image.src = options.src;
 
   }
+
   draw(ctx){
     // ctx.fillText('end of square', this.x+this.width, this.y);
     // ctx.fillStyle = this.color;
     // ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.drawImage(this.image,0, 0, 450, 71, this.x, this.y, this.width, 90);
   }
+  
 }
 module.exports = Platform;
 
@@ -441,11 +455,15 @@ const keynames = {
 
 class Game {
   constructor(ctx){
+    this.width = ctx.canvas.width;
+    this.height = ctx.canvas.height;
+    this.ctx = ctx;
+  }
+
+  setup(){
     this.jumpCount = 0;
     this.aceleration = 0;
     this.acelerationTweening = 0;
-    this.width = ctx.canvas.width;
-    this.height = ctx.canvas.height;
     this.collidedPlatform = null;
     this.scoreColor = '#181818';
     this.jumpCountRecord = 0;
@@ -454,7 +472,6 @@ class Game {
     for( var name in keynames){
       this.keys[keynames[name]] = false;
     }
-    this.ctx = ctx;
     this.gamePlaying = false;
 
     //load Objects
@@ -489,41 +506,27 @@ class Game {
 
     //event listener
     document.addEventListener('keydown', this.keydown.bind(this));
+    // document.addEventListener('keydown', this.reset.bind(this));
     document.addEventListener('keyup', this.keyup.bind(this));
 
-    document.querySelector('.bg-sound').addEventListener('click', this.toggleSound.bind(this));
 
-    document.querySelector('.other-sound').addEventListener('click', this.toggleSound.bind(this));
+    document.querySelector('.bg-sound').addEventListener('click', this.toggleSound.bind(this));
 
     //laod Sounds
     this.setSounds.bind(this);
     this.setSounds();
-    this.bgSound.play();
   }
-  setSounds() {
-    this.jumpSound = new Audio('./assets/sounds/jump.mp3');
-    this.bgSound = new Audio('./assets/sounds/bg.ogg');
-  }
-  toggleSound(e){
-    if( e.currentTarget.className === 'bg-sound'){
-      this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
 
-    }else{
-      // debugger
-      this.jumpSound.paused ? this.jumpSound.play() : this.jumpSound.pause();
-    }
-    const [originText1, originText2] = e.currentTarget.innerText.split(' ');
-
-    originText2 === 'On' ? (e.currentTarget.innerText = originText1.concat(' ','Off')) : (e.currentTarget.innerText = originText1.concat(' ','On'));
-  }
   start() {
+    this.setup();
     if (this.gamePlaying) return;
     this.gamePlaying = true;
-
     this.lastTime = 0;
+    this.bgSound.play();
 
-    this.now = Date.now();
-    requestAnimationFrame(this.animate.bind(this));
+    // this.now = Date.now();
+    // requestAnimationFrame(this.animate.bind(this));
+    this.animate();
   }
 
   clear() {
@@ -538,25 +541,55 @@ class Game {
       this.clear();
       this.draw(this.ctx);
       this.lastTime = time;
-    }else{ //game end
-      this.ctx.font = "30px Comic Sans MS";
-      this.ctx.fillStyle = "red";
-      this.ctx.textAlign = "center";
-      this.ctx.textBaseline = 'bottom';
-      this.ctx.fillText("The Game End", this.width/2, this.height/2);
+      requestAnimationFrame(this.animate.bind(this));
+    }else{
+      this.end();
     }
-    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  end(){
+    // console.log('the end');
+    this.ctx.font = "30px Comic Sans MS";
+    this.ctx.fillStyle = "red";
+    this.ctx.textAlign = "center";
+    this.ctx.textBaseline = 'bottom';
+    this.ctx.fillText("Press 'ENTER' to reset", this.width/2, this.height/2);
+    this.bgSound.pause();
+    this.dogCryingSound.play();
   }
 
   keydown(event) {
-    // debugger
     this.keys[keynames[event.keyCode]] = true;
-    this.jumpSound.play();
+
+    if (this.keys['ENTER']){
+      this.start();
+    }else if(this.keys['SPACE']){
+      this.jumpSound.play();
+    }
   }
 
   keyup(event) {
+    // debugger
     this.keys[keynames[event.keyCode]] = false;
-    this.jumpSound.pause();
+    if (this.keys['SPACE']){
+      this.jumpSound.pause();
+    }
+  }
+
+  setSounds() {
+    this.jumpSound = new Audio('./assets/sounds/jump.mp3');
+    this.bgSound = new Audio('./assets/sounds/bg.ogg');
+    this.dogCryingSound = new Audio('./assets/sounds/dog_crying2.mp3');
+  }
+
+  toggleSound(e){
+    if( e.currentTarget.className === 'bg-sound'){
+      this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
+
+    }
+    const [originText1, originText2] = e.currentTarget.innerText.split(' ');
+
+    originText2 === 'On' ? (e.currentTarget.innerText = originText1.concat(' ','Off')) : (e.currentTarget.innerText = originText1.concat(' ','On'));
   }
 
   updateStatus(){
@@ -583,8 +616,9 @@ class Game {
     this.aceleration += (this.acelerationTweening - this.aceleration) * 0.01;
 
     for (let i = 0; i < this.platformManager.platforms.length; i++) {
-      if (this.player.isCollidedWith(this.platformManager.platforms[i])) {
+      if(this.player.isCollidedWith(this.platformManager.platforms[i])){
         this.collidedPlatform = this.platformManager.platforms[i];
+
         if (this.player.y < this.platformManager.platforms[i].y) {
           this.player.y = this.platformManager.platforms[i].y;
           this.player.velocityY = 0;
@@ -594,11 +628,11 @@ class Game {
         this.player.y = this.player.prevY;
 
 
-        if (this.player.isCollidedWithLeft(this.platformManager.platforms[i])) {
+        if(this.player.isCollidedWithLeft(this.platformManager.platforms[i])) {
+
           this.player.x = this.collidedPlatform.x - 64;
           this.player.velocityY = -10 + -(this.aceleration * 4);
           this.player.velocityX = -20 + -(this.aceleration * 4);
-
         } else {
 
           if (this.dragging || this.keys.SPACE || this.keys.UP || this.keys.W) {
@@ -608,6 +642,7 @@ class Game {
               this.jumpCountRecord = this.jumpCount;
             }
           }
+
         }
       }
     };
@@ -635,7 +670,7 @@ class Game {
 
     ctx.font = '12pt Arial';
     ctx.fillStyle = '#181818';
-    ctx.fillText('SCORE: ' + this.jumpCountRecord, this.width - (150 + (this.aceleration * 4)), 33 - (this.aceleration * 4));
+    ctx.fillText('SCORE: ' + this.jumpCountRecord * 30, this.width - (150 + (this.aceleration * 4)), 33 - (this.aceleration * 4));
 
     ctx.fillStyle = this.scoreColor;
     ctx.font = (12 + (this.aceleration * 3)) + 'pt Arial';
@@ -655,20 +690,16 @@ class Background {
   constructor(options){
     // load a image image
     this.image = new Image();
-    this.image.src = options.src; //"./assets/images/bg1.jpg";
+    this.image.src = options.src; 
     this.speed = 1;
     this.x=0;
     this.y=0;
     this.width = 9992;
     this.height = 3333;
   }
-  updateStatus(){
-
-  }
   draw(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    // debugger
-    // context.drawImage(imageObj, 0, 0, 100, 100 * imageObj.height / imageObj.width)9992 × 3333
+
     ctx.drawImage(this.image,
       0, 0, this.width, this.height,
       this.x, this.y, ctx.canvas.width, ctx.canvas.height );
@@ -677,19 +708,9 @@ class Background {
       0 , 0, this.width, this.height,
       this.x + ctx.canvas.width, this.y, ctx.canvas.width, ctx.canvas.height );
 
-    // console.log(`x: ${this.x}, cavas.width : ${ctx.canvas.width}, this.width: ${this.width}`);
-    let srcreenIndex = 2;
-    if (this.x < ctx.canvas.width * -1) {
-      const newX = this.x + ctx.canvas.width * srcreenIndex;
-
-      ctx.drawImage(this.image,
-        0 , 0, this.width, this.height,
-        newX, this.y, ctx.canvas.width, ctx.canvas.height );
-
-      // console.log(`newX: ${newX}`);
-      if ((this.x % ctx.canvas.width) == 0) {
-        srcreenIndex++;
-      }
+    //redraw after two backgrounds pass by
+    if (this.x < ctx.canvas.width * -1){
+      this.x = 0;
     }
 
     this.scrollImage();
