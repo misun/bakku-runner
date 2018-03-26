@@ -4,7 +4,7 @@
 
 Bakku-Runner Game of Life is a classic example of the concept of **Super Mario Runner**.  The original GoL is a 0-player game that plays out until bumping to other obstacles. On the next iteration of the game the screen follow these rules:
 
-1) bal eagles and raccoons come out regularly,
+1) bald-eagle and raccoons come out regularly,
 2) User can get scores as time goes by.  
 
 ### Functionality & MVP  
@@ -26,8 +26,8 @@ All features in this game would be implemented using native JavaScript DOM manip
 
 This project will be implemented with the following technologies:
 
-- `JavaScript` for game logic,
-- `HTML5 Canvas` for rendering,
+- `JavaScript` for game logic
+- `HTML5 Canvas` for rendering
 - `Webpack` for bundling scripts
 
 ### Implementation Timeline
@@ -44,8 +44,8 @@ This project will be implemented with the following technologies:
 
 **Day 3**: Create the obstacles like racoons. Goals for the day:
 
-- build a 'racoon.js' to shows up raccoons regularly,
-- If time: build 'baldeagle.js' to add a different obstacles.
+- build a 'racoon.js' to shows up raccoons regularly
+- If time: build 'baldeagle.js' to add a different obstacles
 
 **Day 4**: Install the controls for the user to interact with the game.  Style the frontend, making it polished and professional.  Goals for the day:
 
