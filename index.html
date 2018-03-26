@@ -4,26 +4,38 @@
     <meta charset="utf-8">
     <title></title>
     <script src="./bundle.js"></script>
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
     <link rel="stylesheet" href="./assets/css/index.css">
   </head>
   <body>
-    <h1>bakku runner</h1>
+    <header class="header">
+    <nav class="header-nav">
+      <div><h1 class="header-logo">
+        Bakku Runner
+      </h1></div>
+    </nav>
+  </header>
 
-    <!-- <canvas id="container" height="360" width="640" > -->
-    <canvas id="container" width="900" height="450"  >
-      Your browser does not support canvas. Please try again with a different browser.
-    </canvas>
+  <main class="content">
 
-    <div class="controlls">
-      <button class="bg-sound">Background-Sound Off</button>
-      <button class="other-sound">Other-Sound Off</button>
-    <p>Jump: <b>SPACE</b>(Hold to jump higher)</p>
-    <p></p>
-    </div>
-    <section class="bottom">
-      <img class="img-racoon" src="./assets/images/raccoon.png"/>
-      <img class='img-dog' src="./assets/images/bakku.png"/>
+    <section class="content-top">
+      <canvas id="container" width="900" height="450"  >
+        Your browser does not support canvas. Please try again with a different browser.
+      </canvas>
     </section>
-
+    <section class="content-bottom">
+      <div class="controlls">
+        <p>Jump: <b>SPACE</b>(Hold to jump higher)</p>
+        <button class="bg-sound">Background-Sound Off</button>
+      </div>
+      <div class="story">
+        <img class="img-racoon" src="./assets/images/raccoon.png"/>
+        <img class='img-dog' src="./assets/images/bakku.png"/>
+      </div>
+    </section>
+  </main>
+    <!-- <canvas id="container" height="360" width="640" > -->
   </body>
 </html>

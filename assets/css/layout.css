@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: 0;
+}
+
+.content-top {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  padding-right: 19px;
+  border-right: 1px solid #ccc;
+  background-color: #ccc;
+}
+
+.content-bottom {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #ccc;
+}
