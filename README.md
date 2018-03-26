@@ -4,8 +4,8 @@
 
 Bakku-Runner Game of Life is a classic example of the concept of **Super Mario Runner**.  The original GoL is a 0-player game that plays out until bumping to other obstacles. On the next iteration of the game the screen follow these rules:
 
-1) bald-eagle and raccoons come out regularly,
-2) User can get scores as time goes by.  
+1) bald-eagle and raccoons come out regularly
+2) User can get scores as time goes by
 
 [Live Demo](http://www.misun.me/bakku-runner/)
 
@@ -42,7 +42,7 @@ This project will be implemented with the following technologies:
 
 **Day 2**: Add jump and collision. Goals for the day: 
 
-- Create a feature so that a player can jump and collide to obstacles.
+- Create a feature so that a player can jump and collide to obstacles
 
 **Day 3**: Create the obstacles like racoons. Goals for the day:
 
