@@ -439,6 +439,7 @@ const Player = __webpack_require__(1);
 const { random, randomColor } = __webpack_require__(0);
 const Racoon = __webpack_require__(3);
 const Background = __webpack_require__(7);
+const Water = __webpack_require__(8);
 
 const keynames = {
   8: 'BACKSPACE',
@@ -502,7 +503,11 @@ class Game {
     });
 
     //load background
-    this.background = new Background({src: "./assets/images/bg2.jpg"});
+    this.background = new Background({
+      src: "./assets/images/bg2.jpg"
+    });
+
+    this.water = new Water();
 
     //event listener
     document.addEventListener('keydown', this.keydown.bind(this));
@@ -665,6 +670,7 @@ class Game {
 
   draw(ctx){
     this.background.draw(ctx);
+    this.water.draw(ctx);
     this.player.draw(ctx);
     this.platformManager.draw(ctx);
 
@@ -690,7 +696,7 @@ class Background {
   constructor(options){
     // load a image image
     this.image = new Image();
-    this.image.src = options.src; 
+    this.image.src = options.src;
     this.speed = 1;
     this.x=0;
     this.y=0;
@@ -712,7 +718,6 @@ class Background {
     if (this.x < ctx.canvas.width * -1){
       this.x = 0;
     }
-
     this.scrollImage();
   }
 
@@ -723,6 +728,33 @@ class Background {
 }
 
 module.exports = Background;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+class Water{
+  constructor(){
+    this.image = new Image();
+    this.image.src = './assets/images/water_wave.png';
+    this.x = 0;
+    this.y = 400;
+    this.width = 547;
+    this.height = 70;
+
+  }
+  draw(ctx){
+    ctx.drawImage(this.image, 0, 0, this.width, 80, 0, ctx.canvas.height - this.height, ctx.canvas.width, this.height);
+    debugger
+    this.scrollImage();
+  }
+  scrollImage() {
+    this.x -= this.speed;
+  }
+}
+
+module.exports = Water;
 
 
 /***/ })
