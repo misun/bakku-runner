@@ -110,16 +110,6 @@ class Vector{
     this.y = y;
   }
 
-  setX(x){
-    this.prevX = this.x;
-    this.x = x;
-  }
-
-  setY(y){
-    this.prevY = this.y;
-    this.y = y;
-  }
-
   isCollidedWith(otherObject) {
     if (this.x < otherObject.x + otherObject.width &&
      this.x + this.width > otherObject.x &&
@@ -583,7 +573,7 @@ class Game {
 
   setSounds() {
     this.jumpSound = new Audio('./assets/sounds/jump.mp3');
-    this.bgSound = new Audio('./assets/sounds/bg.ogg');
+    this.bgSound = new Audio('./assets/sounds/bg_sound.mp3');
     this.dogCryingSound = new Audio('./assets/sounds/dog_crying2.mp3');
   }
 
@@ -620,6 +610,7 @@ class Game {
 
     this.aceleration += (this.acelerationTweening - this.aceleration) * 0.01;
 
+    //check collision with plaforms
     for (let i = 0; i < this.platformManager.platforms.length; i++) {
       if(this.player.isCollidedWith(this.platformManager.platforms[i])){
         this.collidedPlatform = this.platformManager.platforms[i];
@@ -746,7 +737,6 @@ class Water{
   }
   draw(ctx){
     ctx.drawImage(this.image, 0, 0, this.width, 80, 0, ctx.canvas.height - this.height, ctx.canvas.width, this.height);
-    debugger
     this.scrollImage();
   }
   scrollImage() {
