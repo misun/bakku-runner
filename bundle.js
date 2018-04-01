@@ -234,21 +234,21 @@ class PlatformManager{
       y: options.height -70,
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform3.png"
+      src: "./assets/images/platform_seattle.png"
     })
     this.second = new Platform({
       x: (this.first.x + this.first.width) + random(this.maxDistanceBetween - 150, this.maxDistanceBetween),
       y: random(this.first.y - 128, options.height - 80),
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform3.png"
+      src: "./assets/images/platform_seattle.png"
     })
     this.third = new Platform({
       x: (this.second.x + this.second.width) + random(this.maxDistanceBetween - 150, this.maxDistanceBetween),
       y: random(this.second.y - 128, options.height - 80),
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform3.png"
+      src: "./assets/images/platform_seattle.png"
     })
 // debugger
     this.first.height = this.first.y + options.height;
@@ -311,7 +311,7 @@ class PlatformManager{
     });
 
   }
-  
+
   updateWhenLose(){
     this.first.x = 300;
     this.first.color = randomColor(this.colors);
@@ -489,12 +489,12 @@ class Game {
       height: 53,
       drawingWidth: 131,
       drawingHeight: 63,
-      src: "./assets/images/dog_sprite2.png",
+      src: "./assets/images/dog_sprite.png",
       game: this
     });
 
     this.racoon = new Racoon({
-      src: "./assets/images/raccoon_sprite3.png",
+      src: "./assets/images/raccoon_sprite.png",
       width: 58,
       height: 67,
       drawingWidth: 78,
@@ -510,7 +510,7 @@ class Game {
 
     //load background
     this.background = new Background({
-      src: "./assets/images/bg2.jpg"
+      src: "./assets/images/bg_seattle.jpg"
     });
 
     this.water = new Water();
@@ -534,10 +534,6 @@ class Game {
     this.gamePlaying = true;
     this.lastTime = 0;
     this.toggleSound();
-
-    // this.now = Date.now();
-    // requestAnimationFrame(this.animate.bind(this));
-
     const fps = 80;
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
@@ -766,7 +762,7 @@ module.exports = Background;
 class Water{
   constructor(){
     this.image = new Image();
-    this.image.src = './assets/images/water_wave.png';
+    this.image.src = './assets/images/water_wave1.png';
     this.x = 0;
     this.y = 400;
     this.width = 547;
