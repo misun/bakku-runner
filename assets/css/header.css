@@ -1,12 +1,6 @@
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  background: #eee;
-}
+
 
 .header {
-  border-bottom: 1px solid #ccc;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -17,9 +11,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  width: 900px;
+  flex-direction: column;
 }
 
 .header-logo{
   font-size: 30px;
+}
+
+.social-info{
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+}
+.social-icons{
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+i[class^='icon-']{
+  font-size: 20px;
 }

@@ -1,25 +1,25 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #b4dfe945;
+}
 .content {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   margin: 0 auto;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-top: 0;
+  width: 900px;
 }
 
 .content-top {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  padding-right: 19px;
-  border-right: 1px solid #ccc;
-  background-color: #ccc;
+  border: 2px solid #909aa6;
+  width: 900px;
+  height: 450px;
 }
-
 .content-bottom {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    margin-top: 20px;
 }

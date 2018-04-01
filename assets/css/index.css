@@ -1,8 +1,4 @@
-body{
-  background-color: #ccc;
-}
-#container{
-  border: 1px solid #181818;
+canvas{
 }
 .img-dog{
   width: 300px;
@@ -10,7 +6,6 @@ body{
 .img-racoon{
   width: 200px;
 }
-
 .story{
   display: flex;
   align-items: center;
@@ -18,14 +13,13 @@ body{
 }
 .controlls{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
-
 .controlls button{
-  background-color: #ffff;
+  background-color: #3a4041;
   border: none;
-  color: #45464c;
+  color: #ffff;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -34,7 +28,61 @@ body{
   font-size: 12px;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2), 0 3px 3px 0 rgba(0,0,0,0.19);
 }
-
 .controlls button:hover {
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 10px 0 rgba(0,0,0,0.19);
+}
+@font-face {
+  font-family: "POLYPTY";
+  src: url('../fonts/POLYPTY_.ttf');
+}
+.menu{
+  position: absolute;
+  top: 102px;
+  width: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "POLYPTY";
+  background: no-repeat url('../images/bakku-runner-bg.png');
+  background-size: cover;
+}
+.menu button{
+  width: 300px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #ffff;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 0.5em #42c2d8, 0 0 0.1em #42c2d8;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2), 0 3px 3px 0 rgba(0,0,0,0.19);
+}
+.menu-header{
+  height: 100px;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  color: #ffff;
+  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
+}
+.menu-main{
+  display: flex;
+  width: inherit;
+  height: inherit;
+}
+.menu-main-l{
+  width: 33.3333%;
+}
+.menu-main-m{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33.3333%;
+  justify-content: space-evenly;
+}
+.menu-main-r{
+  width: 33.3333%;
 }

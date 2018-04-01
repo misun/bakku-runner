@@ -379,15 +379,31 @@ const Player = __webpack_require__(1);
 const PlatformManager = __webpack_require__(2);
 const { random, randomColor } = __webpack_require__(0);
 const Game = __webpack_require__(6);
+const Sound = __webpack_require__(9);
+const LevelHandler = __webpack_require__(10);
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('bakku runner start');
 
-  const canvas = document.getElementById('container');
-  const ctx = canvas.getContext('2d');
-  const game = new Game(ctx);
+  this.canvas = document.getElementById('container');
+  this.ctx = this.canvas.getContext('2d');
+  this.menu = document.getElementById('menu');
+  const game = new Game(this.ctx);
+  // debugger
+  // game.toggleSound.bind(game);
+  // game.toggleSound();
+  //background music
+  // this.sound = new Sound();
+  // document.getElementById('bg-sound').addEventListener('click', this.sound.toggleSound.bind(this.sound));
 
-  game.start();
+  //handle levels
+  this.levelHandler = new LevelHandler({ menu, game });
+  this.levelHandler.easy.addEventListener('click', this.levelHandler.setLevel.bind(this.levelHandler));
+  this.levelHandler.medium.addEventListener('click', this.levelHandler.setLevel.bind(this.levelHandler));
+  this.levelHandler.hard.addEventListener('click', this.levelHandler.setLevel.bind(this.levelHandler));
+
+
+
 });
 
 
@@ -505,7 +521,7 @@ class Game {
     document.addEventListener('keyup', this.keyup.bind(this));
 
 
-    document.querySelector('.bg-sound').addEventListener('click', this.toggleSound.bind(this));
+    document.getElementById('bg-sound').addEventListener('click', this.toggleSound.bind(this));
 
     //laod Sounds
     this.setSounds.bind(this);
@@ -517,48 +533,64 @@ class Game {
     if (this.gamePlaying) return;
     this.gamePlaying = true;
     this.lastTime = 0;
-    this.bgSound.play();
+    this.toggleSound();
 
     // this.now = Date.now();
     // requestAnimationFrame(this.animate.bind(this));
+
+    const fps = 80;
+    this.fpsInterval = 1000 / fps;
+    this.then = Date.now();
+    this.startTime = this.then;
+
     this.animate();
+  }
+  drawMenu(){
+    // this.ctx.font = '12pt Arial';
+    // this.ctx.fillStyle = '#181818';
+    // this.ctx.fillText("Menu", this.width/2, this.height/2);
   }
 
   clear() {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  animate(time) {
-    const timeDelta = time - this.lastTime;
-
-    if (this.gamePlaying) {
-      this.updateStatus(this.dt);
-      this.clear();
-      this.draw(this.ctx);
-      this.lastTime = time;
-      requestAnimationFrame(this.animate.bind(this));
-    }else{
+  animate() {
+    if (!this.gamePlaying) {
       this.end();
+      return;
+    }
+
+    requestAnimationFrame(this.animate.bind(this));
+
+    // calc elapsed time since last loop
+    const now = Date.now();
+    const elapsed = now - this.then;
+
+    if (elapsed > this.fpsInterval) {
+        this.updateStatus(this.dt);
+        this.clear();
+        this.draw(this.ctx);
+        this.then = now - (elapsed % this.fpsInterval);
     }
   }
 
   end(){
     // console.log('the end');
-    this.ctx.font = "30px Comic Sans MS";
-    this.ctx.fillStyle = "red";
+    this.ctx.font = "50px POLYPTY";
+    this.ctx.fillStyle = "black";
     this.ctx.textAlign = "center";
-    this.ctx.textBaseline = 'bottom';
     this.ctx.fillText("Press 'ENTER' to reset", this.width/2, this.height/2);
-    this.bgSound.pause();
     this.dogCryingSound.play();
+    this.toggleSound();
   }
 
   keydown(event) {
     this.keys[keynames[event.keyCode]] = true;
 
-    if (this.keys['ENTER']){
+    if (this.keys.ENTER){
       this.start();
-    }else if(this.keys['SPACE']){
+    }else if(this.keys.UP){
       this.jumpSound.play();
     }
   }
@@ -566,25 +598,29 @@ class Game {
   keyup(event) {
     // debugger
     this.keys[keynames[event.keyCode]] = false;
-    if (this.keys['SPACE']){
+    if (this.keys.W){
       this.jumpSound.pause();
     }
   }
 
   setSounds() {
-    this.jumpSound = new Audio('./assets/sounds/jump.mp3');
-    this.bgSound = new Audio('./assets/sounds/bg_sound.mp3');
-    this.dogCryingSound = new Audio('./assets/sounds/dog_crying2.mp3');
+    if (!this.jumpSound)
+      this.jumpSound = new Audio('./assets/sounds/jump.mp3');
+    if (!this.bgSound)
+      this.bgSound = new Audio('./assets/sounds/bg.ogg');
+    if (!this.dogCryingSound)
+      this.dogCryingSound = new Audio('./assets/sounds/dog_crying2.mp3');
   }
 
   toggleSound(e){
-    if( e.currentTarget.className === 'bg-sound'){
+    let target =  e ? e.currentTarget : document.getElementById('bg-sound');
+
+    if( target.id === 'bg-sound'){
       this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
 
     }
-    const [originText1, originText2] = e.currentTarget.innerText.split(' ');
-
-    originText2 === 'On' ? (e.currentTarget.innerText = originText1.concat(' ','Off')) : (e.currentTarget.innerText = originText1.concat(' ','On'));
+    const [originText1, originText2] = target.innerText.split(' ');
+    originText2 === 'On' ? (target.innerText = originText1.concat(' ','Off')) : (target.innerText = originText1.concat(' ','On'));
   }
 
   updateStatus(){
@@ -665,13 +701,15 @@ class Game {
     this.player.draw(ctx);
     this.platformManager.draw(ctx);
 
-    ctx.font = '12pt Arial';
+    //Draw Score
+    ctx.font = '15pt POLYPTY';
     ctx.fillStyle = '#181818';
-    ctx.fillText('SCORE: ' + this.jumpCountRecord * 30, this.width - (150 + (this.aceleration * 4)), 33 - (this.aceleration * 4));
+    ctx.fillText('SCORE: ' + this.jumpCountRecord * 30, this.width - 200, this.height - 400);
 
-    ctx.fillStyle = this.scoreColor;
-    ctx.font = (12 + (this.aceleration * 3)) + 'pt Arial';
-    ctx.fillText('JUMPS: ' + this.jumpCount, this.width - (150 + (this.aceleration * 4)), 50);
+    //Draw Jump
+    // ctx.fillStyle = this.scoreColor;
+    // ctx.font = (12 + (this.aceleration * 3)) + 'pt Arial';
+    // ctx.fillText('JUMPS: ' + this.jumpCount, this.width - (150 + (this.aceleration * 4)), 50);
   }
 
 }
@@ -745,6 +783,47 @@ class Water{
 }
 
 module.exports = Water;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+class Sound {
+  constructor(){
+    this.bgSoundTag = document.getElementById('bg-sound');
+    this.bgSound = new Audio('./assets/sounds/bg.ogg');
+  }
+  toggleSound(e){
+    this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
+    const [originText1, originText2] = this.bgSoundTag.innerText.split(' ');
+    originText2 === 'On' ? (this.bgSoundTag.innerText = originText1.concat(' ','Off')) : (this.bgSoundTag.innerText = originText1.concat(' ','On'));
+  }
+}
+
+module.exports = Sound;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+class LevelHandler{
+  constructor({menu, game}){
+    this.easy = document.getElementById("level-easy");
+    this.medium = document.getElementById("level-medium");
+    this.hard = document.getElementById("level-hard");
+    this.menu = menu;
+    this.game = game;
+  }
+  setLevel(e){
+    this.menu.style.display = "none";
+    this.game.start();
+  }
+
+}
+
+module.exports = LevelHandler;
 
 
 /***/ })

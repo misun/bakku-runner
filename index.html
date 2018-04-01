@@ -4,17 +4,33 @@
     <meta charset="utf-8">
     <title></title>
     <script src="./bundle.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/layout.css">
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/simple-line-icons.css">
   </head>
   <body>
     <header class="header">
     <nav class="header-nav">
-      <div><h1 class="header-logo">
-        Bakku Runner
-      </h1></div>
+      <!-- <div><h1 class="header-logo">Bakku Runner</h1></div> -->
+      <div class="social-info">
+        <div class="controlls">
+          Game created by Misun Son
+        </div>
+        <div class="social-icons">
+          <a href="mailto:misun.son1022@gmail.com" target="_top">
+            <i class="icon-envelope-open"></i>
+          </a>
+          <a href="http://www.misun.me/">
+
+          <i class="icon-home"></i>
+          </a>
+          <a href="https://github.com/misun/bakku-runner"><i class="icon-social-github"></i></a>
+          <a href="https://www.linkedin.com/in/misun-s/"><i class="icon-social-linkedin"></i></a>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -24,18 +40,37 @@
       <canvas id="container" width="900" height="450"  >
         Your browser does not support canvas. Please try again with a different browser.
       </canvas>
+      <div id="menu" class="menu">
+        <div class="menu-header">
+          Bakku Runner
+        </div>
+        <div class="menu-main">
+          <div class="menu-main-l">
+
+          </div>
+          <div class="menu-main-m">
+            <button id="level-easy">EASY</button>
+            <button id="level-medium">MEDIUM</button>
+            <button id="level-hard">HARD</button>
+          </div>
+          <div class="menu-main-r">
+
+          </div>
+        </div>
+
+      </div>
     </section>
     <section class="content-bottom">
       <div class="controlls">
-        <p>Jump: <b>SPACE</b>(Hold to jump higher)</p>
-        <button class="bg-sound">Background-Sound Off</button>
+        <p>Jump: <b>Press the up arrow key "↑" </b>(Hold to jump higher)</p>
+        <button id="bg-sound" class="bg-sound">Background-Sound On</button>
       </div>
+
       <div class="story">
-        <img class="img-racoon" src="./assets/images/raccoon.png"/>
-        <img class='img-dog' src="./assets/images/bakku.png"/>
+        <!-- <img class="img-racoon" src="./assets/images/raccoon.png"/>
+        <img class='img-dog' src="./assets/images/bakku.png"/> -->
       </div>
     </section>
   </main>
-    <!-- <canvas id="container" height="360" width="640" > -->
   </body>
 </html>
