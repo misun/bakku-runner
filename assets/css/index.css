@@ -44,19 +44,18 @@ canvas{
   align-items: center;
   flex-direction: column;
   font-family: "POLYPTY";
-  background: no-repeat url('../images/bakku-runner-bg.png');
-  background-size: cover;
+  /* background: no-repeat url('../images/bakku-runner-easy.png');
+  background-size: cover; */
 }
 .menu button{
-  width: 300px;
-  height: 50px;
+  width: 280px;
+  height: 320px;
   border-radius: 5px;
-  background-color: #ffff;
   text-align: center;
   font-size: 30px;
   color: white;
-  text-shadow: 1px 1px 2px black, 0 0 0.5em #42c2d8, 0 0 0.1em #42c2d8;
-  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2), 0 3px 3px 0 rgba(0,0,0,0.19);
+  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
+  box-shadow: 0 5px 3px 0 rgba(0,0,0,0.2), 0 5px 3px 0 rgba(0,0,0,0.19);
 }
 .menu-header{
   height: 100px;
@@ -72,17 +71,18 @@ canvas{
   display: flex;
   width: inherit;
   height: inherit;
-}
-.menu-main-l{
-  width: 33.3333%;
-}
-.menu-main-m{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 33.3333%;
   justify-content: space-evenly;
+  align-items: center;
 }
-.menu-main-r{
-  width: 33.3333%;
+#level-easy{
+  background: url('../images/bakku-runner-easy.png');
+  background-position: 14% 40%;
+}
+#level-medium{
+  background: url('../images/bakku-runner-medium.jpg');
+  background-position: 26% 40%;
+}
+#level-hard{
+  background: url('../images/bakku-runner-hard.jpg');
+  background-position: 26% 40%;
 }

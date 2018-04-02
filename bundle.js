@@ -222,7 +222,6 @@ module.exports = Player;
 
 const Platform = __webpack_require__(5);
 const { random, randomColor } = __webpack_require__(0);
-const Racoon = __webpack_require__(3);
 
 class PlatformManager{
   constructor(options){
@@ -234,23 +233,28 @@ class PlatformManager{
       y: options.height -70,
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform_seattle.png"
+      src: options.src,
+      imgWidth: options.imgWidth,
+      imgHeight: options.imgHeight
     })
     this.second = new Platform({
       x: (this.first.x + this.first.width) + random(this.maxDistanceBetween - 150, this.maxDistanceBetween),
       y: random(this.first.y - 128, options.height - 80),
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform_seattle.png"
+      src: options.src,
+      imgWidth: options.imgWidth,
+      imgHeight: options.imgHeight
     })
     this.third = new Platform({
       x: (this.second.x + this.second.width) + random(this.maxDistanceBetween - 150, this.maxDistanceBetween),
       y: random(this.second.y - 128, options.height - 80),
       width: 800, //400,
       height: 70,
-      src: "./assets/images/platform_seattle.png"
+      src: options.src,
+      imgWidth: options.imgWidth,
+      imgHeight: options.imgHeight
     })
-// debugger
     this.first.height = this.first.y + options.height;
     this.second.height = this.second.y + options.height;
     this.third.height = this.third.y + options.height;
@@ -264,11 +268,11 @@ class PlatformManager{
     this.width = options.width;
     this.height = options.height;
 
-    this.racoon = options.racoon;
+    this.enemy = options.enemy;
   }
 
   draw(ctx){
-    this.racoon.draw(ctx);
+    this.enemy.draw(ctx);
     for (let i = 0; i < this.platforms.length; i++) {
       // console.log(`${i} platform is drawing`)
       // debugger
@@ -304,8 +308,8 @@ class PlatformManager{
       this.third.color = randomColor(this.colors);
     }
 
-    //racoon status
-    this.racoon.updateStatus({
+    //enemy status
+    this.enemy.updateStatus({
       x: this.second.x + this.second.width/2,
       y: this.second.y +10
     });
@@ -343,9 +347,10 @@ class Racoon extends Vector{
     super(options);
 
     this.image = new Image();
-    this.image.src = options.src;
+    this.image.src =  "./assets/images/raccoon_sprite.png";
     this.spriteSpeed = 0;
-
+    this.drawingWidth =  78;
+    this.drawingHeight = 77;
   }
 
   updateStatus(options={}){
@@ -422,16 +427,14 @@ class Platform extends Vector{
 
     this.image = new Image();
     this.image.src = options.src;
-
+    this.imgWidth = options.imgWidth;
+    this.imgHeight = options.imgHeight;
   }
 
   draw(ctx){
-    // ctx.fillText('end of square', this.x+this.width, this.y);
-    // ctx.fillStyle = this.color;
-    // ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.drawImage(this.image,0, 0, 450, 71, this.x, this.y, this.width, 90);
+    ctx.drawImage(this.image,0, 0, this.imgWidth, this.imgHeight, this.x, this.y, this.width, 90);
   }
-  
+
 }
 module.exports = Platform;
 
@@ -446,6 +449,8 @@ const { random, randomColor } = __webpack_require__(0);
 const Racoon = __webpack_require__(3);
 const Background = __webpack_require__(7);
 const Water = __webpack_require__(8);
+const Bear = __webpack_require__(11);
+const Wolf = __webpack_require__(13);
 
 const keynames = {
   8: 'BACKSPACE',
@@ -465,6 +470,7 @@ class Game {
     this.width = ctx.canvas.width;
     this.height = ctx.canvas.height;
     this.ctx = ctx;
+    this.level = null;
   }
 
   setup(){
@@ -493,25 +499,68 @@ class Game {
       game: this
     });
 
-    this.racoon = new Racoon({
-      src: "./assets/images/raccoon_sprite.png",
-      width: 58,
-      height: 67,
-      drawingWidth: 78,
-      drawingHeight: 77
-    });
-
-    this.platformManager = new PlatformManager({
-      width: this.width,
-      height: this.height,
-      aceleration: this.aceleration,
-      racoon: this.racoon
-    });
+    //load enemies
+    const collinsionEnemyPos = {
+      width: 58,  //collision width
+      height: 67 //collision height
+    };
+    if ( this.level === "EASY" ){
+      this.enemy = new Racoon(collinsionEnemyPos);
+    }else if ( this.level === "MEDIUM"){
+      this.enemy = new Wolf(collinsionEnemyPos);
+    }else{
+      this.enemy = new Bear(collinsionEnemyPos);
+    }
 
     //load background
-    this.background = new Background({
-      src: "./assets/images/bg_seattle.jpg"
-    });
+    if (this.level === "EASY"){
+      this.background = new Background({
+        src: "./assets/images/bg_seattle.jpg",
+        width:9992 ,
+        height:3333
+      });
+      this.platformManager = new PlatformManager({
+        width: this.width,
+        height: this.height,
+        aceleration: this.aceleration,
+        enemy: this.enemy,
+        src: "./assets/images/platform_seattle.png",
+        imgWidth: 450,
+        imgHeight: 71
+      });
+    }else if (this.level === "MEDIUM"){
+      this.background = new Background({
+        src: "./assets/images/bg_newyork.jpg",
+        width: 9458,
+        height: 3333
+      });
+      this.platformManager = new PlatformManager({
+        width: this.width,
+        height: this.height,
+        aceleration: this.aceleration,
+        enemy: this.enemy,
+        src: "./assets/images/platform_newyork.png",
+        imgWidth: 246,
+        imgHeight: 71
+      });
+    }else{
+      this.background = new Background({
+        src: "./assets/images/bg_winter.jpg",
+        width: 6666,
+        height: 3333
+      });
+      this.platformManager = new PlatformManager({
+        width: this.width,
+        height: this.height,
+        aceleration: this.aceleration,
+        enemy: this.enemy,
+        src: "./assets/images/platform_winter.png",
+        imgWidth: 123,
+        imgHeight: 46
+      });
+
+    }
+
 
     this.water = new Water();
 
@@ -541,12 +590,6 @@ class Game {
 
     this.animate();
   }
-  drawMenu(){
-    // this.ctx.font = '12pt Arial';
-    // this.ctx.fillStyle = '#181818';
-    // this.ctx.fillText("Menu", this.width/2, this.height/2);
-  }
-
   clear() {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
@@ -679,8 +722,8 @@ class Game {
       this.platformManager.updateStatus();
     };
 
-    //check collision with racoon
-    if (this.player.isCollidedWith(this.racoon)){
+    //check collision with enemy
+    if (this.player.isCollidedWith(this.enemy)){
       this.gamePlaying = false;
     }
 
@@ -725,8 +768,8 @@ class Background {
     this.speed = 1;
     this.x=0;
     this.y=0;
-    this.width = 9992;
-    this.height = 3333;
+    this.width = options.width;
+    this.height = options.height;
   }
   draw(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -814,12 +857,116 @@ class LevelHandler{
   }
   setLevel(e){
     this.menu.style.display = "none";
+    this.game.level = e.currentTarget.value;
     this.game.start();
   }
 
 }
 
 module.exports = LevelHandler;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const { Vector } = __webpack_require__(0);
+const BEAR_SPRITES = [
+  { x: 0, y: 0 },
+  { x: 93.125, y: 0 },
+  { x: 186.25, y: 0 },
+  { x: 279.375, y: 0 },
+  { x: 372.5, y: 0 },
+  { x: 465.625, y: 0 },
+  { x: 558.75, y: 0 },
+  { x: 651.875, y: 0 },
+]
+
+class Bear extends Vector{
+  constructor(options={}){
+    super(options);
+
+    this.image = new Image();
+    this.image.src = "./assets/images/platform_bear2.png";
+    this.spriteSpeed = 0;
+    this.drawingWidth = 113;
+    this.drawingHeight = 126;
+  }
+
+  updateStatus(options={}){
+    this.x = options.x;
+    this.y = options.y - this.height;
+    this.spriteSpeed += 0.05;
+  }
+
+  draw(ctx) {
+    const spriteIndex = parseInt(this.spriteSpeed) % BEAR_SPRITES.length;
+    const sprite = BEAR_SPRITES[spriteIndex];
+    const srcBearWidth = 93.125, srcBearHeight = 106;
+
+    ctx.drawImage(
+      this.image,
+      sprite.x, sprite.y , srcBearWidth, srcBearHeight,
+      this.x, this.y - 30,
+      this.drawingWidth , this.drawingHeight);
+  }
+
+}
+
+module.exports = Bear;
+
+
+/***/ }),
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const { Vector } = __webpack_require__(0);
+const WOLF_SPRITES = [
+  { x: 0, y: 0 },
+  { x: 66.18, y: 0 },
+  { x: 132.26, y: 0 },
+  { x: 198.54, y: 0 },
+  { x: 264.72, y: 0 },
+  { x: 330.90, y: 0 },
+  { x: 397, y: 0 },
+  { x: 463.56, y: 0 },
+  { x: 529.74, y: 0 },
+  { x: 595.92, y: 0 },
+  { x: 662.10, y: 0 }
+]
+class Cat extends Vector{
+  constructor(options={}){
+    super(options);
+
+    this.image = new Image();
+    this.image.src = "./assets/images/wolf.png";
+    this.spriteSpeed = 0;
+    this.drawingWidth = 132;
+    this.drawingHeight = 122;
+  }
+
+  updateStatus(options={}){
+    this.x = options.x;
+    this.y = options.y - this.height;
+    this.spriteSpeed += 0.01;
+  }
+
+  draw(ctx) {
+    const spriteIndex = parseInt(this.spriteSpeed) % WOLF_SPRITES.length;
+    const sprite = WOLF_SPRITES[spriteIndex];
+    const srcCatWidth = 66.18, srcCatHeight = 56;
+
+    ctx.drawImage(
+      this.image,
+      sprite.x, sprite.y , srcCatWidth, srcCatHeight,
+      this.x, this.y - 50,
+      this.drawingWidth , this.drawingHeight);
+  }
+
+}
+
+module.exports = Cat;
 
 
 /***/ })
