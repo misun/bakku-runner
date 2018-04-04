@@ -3,7 +3,7 @@
   src: url('../fonts/POLYPTY_.ttf');
 }
 body {
-  font-family: 'Ubuntu','Rubik', 'Nanum Pen Script','Harmattan', 'Caveat','Roboto',sans-serif;
+  font-family: 'Ubuntu','Nanum Pen Script','Roboto',sans-serif;
   font-size: 15px;
   font-weight: 400;
   background-color: #b4dfe945;

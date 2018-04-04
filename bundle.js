@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -220,7 +220,7 @@ module.exports = Player;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const Platform = __webpack_require__(5);
+const Platform = __webpack_require__(4);
 const { random, randomColor } = __webpack_require__(0);
 
 class PlatformManager{
@@ -333,59 +333,12 @@ module.exports = PlatformManager;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const { Vector } = __webpack_require__(0);
-const RACCOON_SPRITES = [
-  { x: 0, y: 0 },
-  { x: 0, y: 114 },
-  { x: 0, y: 228 },
-  { x: 0, y: 342 },
-  { x: 0, y: 456 }
-]
-
-class Racoon extends Vector{
-  constructor(options={}){
-    super(options);
-
-    this.image = new Image();
-    this.image.src =  "./assets/images/raccoon_sprite.png";
-    this.spriteSpeed = 0;
-    this.drawingWidth =  78;
-    this.drawingHeight = 77;
-  }
-
-  updateStatus(options={}){
-    this.x = options.x;
-    this.y = options.y - this.height;
-    this.spriteSpeed += 0.05;
-  }
-
-  draw(ctx) {
-    const spriteIndex = parseInt(this.spriteSpeed) % RACCOON_SPRITES.length;
-    const sprite = RACCOON_SPRITES[spriteIndex];
-    const srcRacoonWidth = 118, srcRacoonHeight = 107;
-
-    ctx.drawImage(
-      this.image,
-      sprite.x, sprite.y , srcRacoonWidth, srcRacoonHeight,
-      this.x, this.y -10 ,
-      this.drawingWidth , this.drawingHeight);
-  }
-
-}
-
-module.exports = Racoon;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 const Player = __webpack_require__(1);
 const PlatformManager = __webpack_require__(2);
 const { random, randomColor } = __webpack_require__(0);
-const Game = __webpack_require__(6);
-const Sound = __webpack_require__(9);
-const LevelHandler = __webpack_require__(10);
+const Game = __webpack_require__(5);
+const Sound = __webpack_require__(11);
+const LevelHandler = __webpack_require__(12);
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('bakku runner start');
@@ -413,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const { Vector } = __webpack_require__(0);
@@ -440,17 +393,17 @@ module.exports = Platform;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const PlatformManager = __webpack_require__(2);
 const Player = __webpack_require__(1);
 const { random, randomColor } = __webpack_require__(0);
-const Racoon = __webpack_require__(3);
+const Racoon = __webpack_require__(6);
 const Background = __webpack_require__(7);
 const Water = __webpack_require__(8);
-const Bear = __webpack_require__(11);
-const Wolf = __webpack_require__(13);
+const Bear = __webpack_require__(9);
+const Wolf = __webpack_require__(10);
 
 const keynames = {
   8: 'BACKSPACE',
@@ -757,6 +710,53 @@ module.exports = Game;
 
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const { Vector } = __webpack_require__(0);
+const RACCOON_SPRITES = [
+  { x: 0, y: 0 },
+  { x: 0, y: 114 },
+  { x: 0, y: 228 },
+  { x: 0, y: 342 },
+  { x: 0, y: 456 }
+]
+
+class Racoon extends Vector{
+  constructor(options={}){
+    super(options);
+
+    this.image = new Image();
+    this.image.src =  "./assets/images/raccoon_sprite.png";
+    this.spriteSpeed = 0;
+    this.drawingWidth =  78;
+    this.drawingHeight = 77;
+  }
+
+  updateStatus(options={}){
+    this.x = options.x;
+    this.y = options.y - this.height;
+    this.spriteSpeed += 0.05;
+  }
+
+  draw(ctx) {
+    const spriteIndex = parseInt(this.spriteSpeed) % RACCOON_SPRITES.length;
+    const sprite = RACCOON_SPRITES[spriteIndex];
+    const srcRacoonWidth = 118, srcRacoonHeight = 107;
+
+    ctx.drawImage(
+      this.image,
+      sprite.x, sprite.y , srcRacoonWidth, srcRacoonHeight,
+      this.x, this.y -10 ,
+      this.drawingWidth , this.drawingHeight);
+  }
+
+}
+
+module.exports = Racoon;
+
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -826,48 +826,6 @@ module.exports = Water;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-class Sound {
-  constructor(){
-    this.bgSoundTag = document.getElementById('bg-sound');
-    this.bgSound = new Audio('./assets/sounds/bg.ogg');
-  }
-  toggleSound(e){
-    this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
-    const [originText1, originText2] = this.bgSoundTag.innerText.split(' ');
-    originText2 === 'On' ? (this.bgSoundTag.innerText = originText1.concat(' ','Off')) : (this.bgSoundTag.innerText = originText1.concat(' ','On'));
-  }
-}
-
-module.exports = Sound;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-class LevelHandler{
-  constructor({menu, game}){
-    this.easy = document.getElementById("level-easy");
-    this.medium = document.getElementById("level-medium");
-    this.hard = document.getElementById("level-hard");
-    this.menu = menu;
-    this.game = game;
-  }
-  setLevel(e){
-    this.menu.style.display = "none";
-    this.game.level = e.currentTarget.value;
-    this.game.start();
-  }
-
-}
-
-module.exports = LevelHandler;
-
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const { Vector } = __webpack_require__(0);
@@ -917,8 +875,7 @@ module.exports = Bear;
 
 
 /***/ }),
-/* 12 */,
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const { Vector } = __webpack_require__(0);
@@ -967,6 +924,48 @@ class Cat extends Vector{
 }
 
 module.exports = Cat;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+class Sound {
+  constructor(){
+    this.bgSoundTag = document.getElementById('bg-sound');
+    this.bgSound = new Audio('./assets/sounds/bg.ogg');
+  }
+  toggleSound(e){
+    this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
+    const [originText1, originText2] = this.bgSoundTag.innerText.split(' ');
+    originText2 === 'On' ? (this.bgSoundTag.innerText = originText1.concat(' ','Off')) : (this.bgSoundTag.innerText = originText1.concat(' ','On'));
+  }
+}
+
+module.exports = Sound;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+class LevelHandler{
+  constructor({menu, game}){
+    this.easy = document.getElementById("level-easy");
+    this.medium = document.getElementById("level-medium");
+    this.hard = document.getElementById("level-hard");
+    this.menu = menu;
+    this.game = game;
+  }
+  setLevel(e){
+    this.menu.style.display = "none";
+    this.game.level = e.currentTarget.value;
+    this.game.start();
+  }
+
+}
+
+module.exports = LevelHandler;
 
 
 /***/ })
