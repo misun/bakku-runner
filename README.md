@@ -4,22 +4,34 @@
 
 Bakku-Runner Game of Life is a classic example of the concept of **Super Mario Runner**.  The original GoL is a 0-player game that plays out until bumping to other obstacles. On the next iteration of the game the screen follow these rules:
 
-1) bald-eagle and raccoons come out regularly
-2) User can get scores as time goes by
+1) Raccoons come out when a user chooses 'EASY' level with woodland background
+2) Wolves come out when a user chooses 'MEDIUM' level with newyork city background
+3) Polarbears come out when a user chooses 'HARD' level with winter background
+4) User can get scores with jumping as time goes by
 
 [Live Demo](http://www.misun.me/bakku-runner/)
+
+
+### Demo
+#### level EASY
+![level-easy](https://user-images.githubusercontent.com/3492959/38317267-a3f40d52-37fa-11e8-9625-103eda8aa5be.gif)
+#### level MEDIUM
+![level-medium](https://user-images.githubusercontent.com/3492959/38317290-b124d164-37fa-11e8-9ee9-2c4873ae4a65.gif)
+#### level HARD
+![level-hard](https://user-images.githubusercontent.com/3492959/38317296-b5c6a4c2-37fa-11e8-828d-85bb7e742d7f.gif)
+
 
 ### Functionality & MVP  
 
 With this bakku-runner Game of Life simulator, users will be able to:
 
-- [ ] Start and reset the game
-- [ ] Jump with space
-- [ ] Choose from preset demo initial states
+- [x] Start and reset the game
+- [x] Jump with the up arroy key
+- [x] Choose level from menu
 
 In addition, this project will include:
 
-- [ ] An About rules of the game
+- [x] An About rules of the game
 - [ ] A production README
 
 ### Architecture and Technologies
@@ -61,4 +73,4 @@ This project will be implemented with the following technologies:
 There are many directions this cellular automata engine could eventually go.  Some anticipated updates are:
 
 - [ ] Add options for difficulties
-- [ ] Add multiple choices for starting states that are interesting
+- [x] Add multiple theme for difficulties
