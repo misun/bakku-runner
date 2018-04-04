@@ -1,39 +1,8 @@
-canvas{
-}
-.img-dog{
-  width: 300px;
-}
-.img-racoon{
-  width: 200px;
-}
-.story{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.controlls{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.controlls button{
-  background-color: #3a4041;
-  border: none;
-  color: #ffff;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 12px;
-  font-size: 12px;
-  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2), 0 3px 3px 0 rgba(0,0,0,0.19);
-}
-.controlls button:hover {
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 10px 0 rgba(0,0,0,0.19);
-}
 @font-face {
   font-family: "POLYPTY";
   src: url('../fonts/POLYPTY_.ttf');
+}
+canvas{
 }
 .menu{
   position: absolute;
@@ -44,8 +13,7 @@ canvas{
   align-items: center;
   flex-direction: column;
   font-family: "POLYPTY";
-  /* background: no-repeat url('../images/bakku-runner-easy.png');
-  background-size: cover; */
+  /* font-family: 'Fascinate', cursive; */
 }
 .menu button{
   width: 280px;
