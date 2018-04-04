@@ -13,11 +13,11 @@ Bakku-Runner Game of Life is a classic example of the concept of **Super Mario R
 
 
 ### Demo
-#### level EASY
+#### Level EASY
 ![level-easy](https://user-images.githubusercontent.com/3492959/38317267-a3f40d52-37fa-11e8-9625-103eda8aa5be.gif)
-#### level MEDIUM
+#### Level MEDIUM
 ![level-medium](https://user-images.githubusercontent.com/3492959/38317290-b124d164-37fa-11e8-9ee9-2c4873ae4a65.gif)
-#### level HARD
+#### Level HARD
 ![level-hard](https://user-images.githubusercontent.com/3492959/38317296-b5c6a4c2-37fa-11e8-828d-85bb7e742d7f.gif)
 
 
