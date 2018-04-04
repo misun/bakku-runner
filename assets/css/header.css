@@ -1,12 +1,10 @@
-
-
 .header {
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* font-family: 'Rubik', 'Nanum Pen Script','Harmattan','Patrick Hand' 'Roboto',sans-serif; */
 }
-
 .header-nav {
   display: flex;
   justify-content: center;
@@ -14,22 +12,25 @@
   width: 900px;
   flex-direction: column;
 }
-
-.header-logo{
-  font-size: 30px;
-}
-
-.social-info{
+.social-info {
   width: 900px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.social-createdby{
+  font-size: 30px;
+  font-family: 'Nanum Pen Script';
 }
 .social-icons{
-  width: 200px;
+  width: 400px;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
-
-i[class^='icon-']{
-  font-size: 20px;
+.social-icons img{
+  width: 30px;
+}
+a[class^='icon-']{
+  font-size: 15px;
 }
