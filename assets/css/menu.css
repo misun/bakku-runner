@@ -2,8 +2,6 @@
   font-family: "POLYPTY";
   src: url('../fonts/POLYPTY_.ttf');
 }
-canvas{
-}
 .menu{
   position: absolute;
   top: 102px;
