@@ -7,6 +7,7 @@ body {
   font-size: 15px;
   font-weight: 400;
   background-color: #0e0d1336;
+  color: #777;
 }
 .content {
   display: flex;
@@ -17,12 +18,10 @@ body {
 }
 .jindo1{
   width: 50px;
-
 }
 canvas{
   border-radius: 7px;
   position: absolute;
-  /* top: 102px; */
   width: inherit;
   height: inherit;
 }
@@ -31,21 +30,19 @@ canvas{
   width: 900px;
   height: 450px;
   border-radius: 7px;
-  /* position: absolute;
-  top: 100px; */
 }
 .content-bottom {
     display: flex;
     flex-direction: column;
     width: inherit;
     margin-top: 20px;
+    color: #777;
 }
 .guide{
-  display: flex;
+  color: dimgrey;
 }
 .story{
   margin-top: 30px;
-  width: 50%;
 }
 .enemy-icon{
   width: 60px;
@@ -54,6 +51,8 @@ canvas{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  font-family: 'Nanum Pen Script';
+  font-size: 30px;
 }
 .controlls{
   display: flex;
@@ -74,5 +73,5 @@ canvas{
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2), 0 3px 3px 0 rgba(0,0,0,0.19);
 }
 .controlls button:hover {
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 10px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 10px 0 rgba(0,0,0,0.19);
 }

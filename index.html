@@ -9,11 +9,73 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/content.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
     <link rel="stylesheet" href="./assets/css/menu.css">
   </head>
+
   <body>
     <header class="header">
-    <nav class="header-nav">
+      <nav class="header-nav">
+      </nav>
+    </header>
+
+    <main class="content">
+
+      <div class="enemy">
+        <img class="jindo1" src="./assets/images/jindo2.png" />
+        "Enemies" ~>
+        <img class="enemy-icon" src="./assets/images/desc_raccoon.png" />
+        <img class="enemy-icon" src="./assets/images/desc_wolf.png" />
+        <img class="enemy-icon" src="./assets/images/desc_bear.png" />
+      </div>
+
+      <section class="content-top">
+        <canvas id="container" width="900" height="450"  >
+          Your browser does not support canvas. Please try again with a different browser.
+        </canvas>
+        <div id="menu" class="menu">
+          <div class="menu-header">
+            Bakku Runner
+          </div>
+          <div class="menu-main">
+              <div class="level-easy">
+                <button id="level-easy" value="EASY">EASY</button>
+              </div>
+              <div class="level-medium">
+                <button id="level-medium" value="MEDIUM">MEDIUM</button>
+              </div>
+              <div class="level-hard">
+                <button id="level-hard" value="HARD">HARD</button>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="content-bottom">
+        <div class="controlls">
+          <p>Jump: <b>Press the up arrow key "↑" </b>(Hold to jump higher)</p>
+          <button id="bg-sound" class="bg-sound">Background-Sound On</button>
+        </div>
+        <div class="guide">
+          <div class="story">
+            <h3>Description</h3>
+            <p>
+            Start playing Bakku Runner.
+            Jump over to avoid enemies like raccoons, wolve, or polar bears to get high score.
+            </p>
+            <h3>Bakku Runner features:</h3>
+             3 Game Modes : "EASY" with raccoons
+
+             , "MEDIUM" with wolves
+
+             , and "HARD" with polarbears</p>
+            <h3>"Have fun playing Bakku Runner!"</h3>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
       <div class="social-info">
         <div class="social-createdby">
           Created by Misun Son
@@ -33,90 +95,7 @@
           </a>
         </div>
       </div>
-    </nav>
-  </header>
+    </footer>
 
-  <main class="content">
-
-    <div class="enemy">
-      <img class="jindo1" src="./assets/images/jindo2.png" />
-      <img class="enemy-icon" src="./assets/images/desc_raccoon.png" />
-      <img class="enemy-icon" src="./assets/images/desc_wolf.png" />
-      <img class="enemy-icon" src="./assets/images/desc_bear.png" />
-    </div>
-
-    <section class="content-top">
-      <canvas id="container" width="900" height="450"  >
-        Your browser does not support canvas. Please try again with a different browser.
-      </canvas>
-      <div id="menu" class="menu">
-        <div class="menu-header">
-          Bakku Runner
-        </div>
-        <div class="menu-main">
-            <div class="level-easy">
-              <button id="level-easy" value="EASY">EASY</button>
-            </div>
-            <div class="level-medium">
-              <button id="level-medium" value="MEDIUM">MEDIUM</button>
-            </div>
-            <div class="level-hard">
-              <button id="level-hard" value="HARD">HARD</button>
-            </div>
-          </div>
-      </div>
-    </section>
-    <section class="content-bottom">
-      <div class="controlls">
-        <p>Jump: <b>Press the up arrow key "↑" </b>(Hold to jump higher)</p>
-        <button id="bg-sound" class="bg-sound">Background-Sound On</button>
-      </div>
-      <div class="guide">
-        <div class="story">
-          <h3>Description</h3>
-          <p>
-          Start playing Bakku Runner.
-          Jump over to avoid enemies like raccoons, wolve, or polar bears to get high score.
-          </p>
-          <br>
-          <br>
-          <h3>Have fun playing Bakku Runner!</h3>
-        </div>
-        <div class="story">
-          <h3>Bakku Runner features:</h3>
-          <p>3 Enemies & 3 Game Modes</p>
-          <br>
-          <br>
-
-          <div class="enemy">
-            <div class="">
-              <p>EASY</p>
-              <img class="enemy-icon" src="./assets/images/desc_raccoon.png" />
-            </div>
-            <div class="">
-              <p>MEDIUM</p>
-              <img class="enemy-icon" src="./assets/images/desc_wolf.png" />
-            </div>
-            <div class="">
-              <p>HARD</p>
-              <img class="enemy-icon" src="./assets/images/desc_bear.png" />
-            </div>
-          </div>
-          <!-- Change background to woodland, and racoons show up -->
-          <!-- <br> -->
-          <!-- <br> -->
-          <!-- • Medium: -->
-          <!-- Change background to city, and wolves show up -->
-          <!-- <br> -->
-          <!-- <br> -->
-          <!-- • Hard: -->
-          <!-- Change background to winter, and polarbears show up -->
-          <!-- <br> -->
-          <!-- <br> -->
-
-        </div>
-      </div>
-    </section>
-  </main>
   </body>
 </html>

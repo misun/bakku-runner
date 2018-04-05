@@ -1,0 +1,23 @@
+.social-info {
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3em auto;
+}
+.social-createdby{
+  font-size: 30px;
+  font-family: 'Nanum Pen Script';
+}
+.social-icons{
+  width: 400px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.social-icons img{
+  width: 30px;
+}
+a[class^='icon-']{
+  font-size: 15px;
+}
