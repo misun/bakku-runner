@@ -6,7 +6,7 @@ body {
   font-family: 'Ubuntu','Nanum Pen Script','Roboto',sans-serif;
   font-size: 15px;
   font-weight: 400;
-  background-color: #b4dfe945;
+  background-color: #0e0d1336;
 }
 .content {
   display: flex;
@@ -15,14 +15,24 @@ body {
   margin: 0 auto;
   width: 900px;
 }
+.jindo1{
+  width: 50px;
+
+}
 canvas{
   border-radius: 7px;
+  position: absolute;
+  /* top: 102px; */
+  width: inherit;
+  height: inherit;
 }
 .content-top {
   border: 2px solid #909aa6;
   width: 900px;
   height: 450px;
   border-radius: 7px;
+  /* position: absolute;
+  top: 100px; */
 }
 .content-bottom {
     display: flex;
@@ -37,12 +47,13 @@ canvas{
   margin-top: 30px;
   width: 50%;
 }
-.story img{
+.enemy-icon{
   width: 60px;
 }
 .enemy{
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 .controlls{
   display: flex;

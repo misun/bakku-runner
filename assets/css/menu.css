@@ -4,16 +4,18 @@
 }
 .menu{
   position: absolute;
-  top: 102px;
+  /* top: 102px; */
   width: inherit;
   height: inherit;
   display: flex;
   align-items: center;
   flex-direction: column;
   font-family: "POLYPTY";
-  background-color: #03181cd1;
+  background-color: #ffff;
+  border-radius: 7px;
+
 }
-.menu-header{
+.menu-header {
   height: 100px;
   width: inherit;
   display: flex;
@@ -21,7 +23,7 @@
   align-items: center;
   font-size: 70px;
   color: #ffff;
-  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
+  text-shadow: 1px 1px 2px #883f3f, 0 0 0.5em #383748, 0 0 0.1em #676030;
 }
 .menu-main{
   display: flex;
@@ -40,7 +42,7 @@ div[class^='level-']{
 div[class^='level-'] button{
   font-size: 30px;
   color: white;
-  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
+  text-shadow: 1px 1px 2px #883f3f, 0 0 0.5em #383748, 0 0 0.1em #676030;
 }
 .level-easy:hover{
   background: url('../images/bakku-runner-easy.png');
