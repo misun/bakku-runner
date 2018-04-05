@@ -487,9 +487,11 @@ class Game {
 
     document.getElementById('bg-sound').addEventListener('click', this.toggleSound.bind(this));
 
+
     //laod Sounds
     this.setSounds.bind(this);
     this.setSounds();
+    this.toggleSound();
 
     this.score = new Score({
       width: this.width,
@@ -560,7 +562,6 @@ class Game {
     if (this.gamePlaying) return;
     this.gamePlaying = true;
     this.lastTime = 0;
-    this.toggleSound();
     const fps = 80;
     this.fpsInterval = 1000 / fps;
     this.then = Date.now();
@@ -608,7 +609,6 @@ class Game {
     this.ctx.shadowColor = 0;
     this.ctx.shadowBlur = -1;
     this.dogCryingSound.play();
-    this.toggleSound();
   }
 
   keydown(event) {
