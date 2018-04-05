@@ -11,17 +11,7 @@
   align-items: center;
   flex-direction: column;
   font-family: "POLYPTY";
-  /* font-family: 'Fascinate', cursive; */
-}
-.menu button{
-  width: 280px;
-  height: 320px;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 30px;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
-  box-shadow: 0 5px 3px 0 rgba(0,0,0,0.2), 0 5px 3px 0 rgba(0,0,0,0.19);
+  background-color: #03181cd1;
 }
 .menu-header{
   height: 100px;
@@ -36,19 +26,46 @@
 .menu-main{
   display: flex;
   width: inherit;
-  height: inherit;
   justify-content: space-evenly;
   align-items: center;
 }
-#level-easy{
+div[class^='level-']{
+  border-radius: 10px;
+  width: 280px;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 5px 3px 0 rgba(0,0,0,0.2), 0 5px 3px 0 rgba(0,0,0,0.19);
+}
+div[class^='level-'] button{
+  font-size: 30px;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 0.5em blue, 0 0 0.1em blue;
+}
+.level-easy:hover{
+  background: url('../images/bakku-runner-easy.png');
+  background-position: 20% 80%;
+  background-size: 2500px;
+}
+.level-easy{
   background: url('../images/bakku-runner-easy.png');
   background-position: 14% 40%;
 }
-#level-medium{
+.level-medium{
   background: url('../images/bakku-runner-medium.jpg');
   background-position: 26% 40%;
 }
-#level-hard{
+.level-medium:hover{
+  background: url('../images/bakku-runner-medium.jpg');
+  background-position: 43% 63%;
+  background-size: 2000px;
+}
+.level-hard{
   background: url('../images/bakku-runner-hard.jpg');
   background-position: 26% 40%;
+}
+.level-hard:hover{
+  background: url('../images/bakku-runner-hard.jpg');
+  background-position: 43% 50%;
+  background-size: 2000px;
 }
