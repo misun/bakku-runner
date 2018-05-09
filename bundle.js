@@ -348,7 +348,7 @@ const Sound = __webpack_require__(12);
 const LevelHandler = __webpack_require__(13);
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('bakku runner start1');
+  console.log('bakku runner start');
 
   this.canvas = document.getElementById('container');
   this.ctx = this.canvas.getContext('2d');
@@ -668,8 +668,6 @@ class Game {
     this.aceleration += (this.acelerationTweening - this.aceleration) * 0.01;
     //check collision with plaforms
     for (let i = 0; i < this.platformManager.platforms.length; i++) {
-      console.log(`1) x : ${this.player.x}, y: ${this.player.y}, platforms[] x: ${this.platformManager.platforms[i].x}, y: ${this.platformManager.platforms[i].y}`)
-
       if(this.player.isCollidedWith(this.platformManager.platforms[i])){
         this.collidedPlatform = this.platformManager.platforms[i];
 
