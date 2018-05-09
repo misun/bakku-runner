@@ -203,7 +203,7 @@ class Player extends Vector{
 
     this.spriteSpeed += 0.2;
   }
-  
+
   draw(ctx) {
     const spriteIndex = parseInt(this.spriteSpeed) % DOG_SPRITES.length;
     const srcPlayerWidth = 141, srcPlayerHeight = 73;
@@ -344,11 +344,11 @@ const Player = __webpack_require__(1);
 const PlatformManager = __webpack_require__(2);
 const { random, randomColor } = __webpack_require__(0);
 const Game = __webpack_require__(5);
-const Sound = __webpack_require__(11);
-const LevelHandler = __webpack_require__(12);
+const Sound = __webpack_require__(12);
+const LevelHandler = __webpack_require__(13);
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('bakku runner start');
+  console.log('bakku runner start1');
 
   this.canvas = document.getElementById('container');
   this.ctx = this.canvas.getContext('2d');
@@ -357,13 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx: this.ctx,
     menu: this.menu
   });
-  // debugger
-  // game.toggleSound.bind(game);
-  // game.toggleSound();
-  //background music
-  // this.sound = new Sound();
-  // document.getElementById('bg-sound').addEventListener('click', this.sound.toggleSound.bind(this.sound));
-
   //handle levels
   this.levelHandler = new LevelHandler({ menu, game });
   this.levelHandler.easy.addEventListener('click', this.levelHandler.setLevel.bind(this.levelHandler));
@@ -414,7 +407,7 @@ const Background = __webpack_require__(7);
 const Water = __webpack_require__(8);
 const Bear = __webpack_require__(9);
 const Wolf = __webpack_require__(10);
-const Score = __webpack_require__(13);
+const Score = __webpack_require__(11);
 
 const keynames = {
   8: 'BACKSPACE',
@@ -673,9 +666,10 @@ class Game {
     }
 
     this.aceleration += (this.acelerationTweening - this.aceleration) * 0.01;
-
     //check collision with plaforms
     for (let i = 0; i < this.platformManager.platforms.length; i++) {
+      console.log(`1) x : ${this.player.x}, y: ${this.player.y}, platforms[] x: ${this.platformManager.platforms[i].x}, y: ${this.platformManager.platforms[i].y}`)
+
       if(this.player.isCollidedWith(this.platformManager.platforms[i])){
         this.collidedPlatform = this.platformManager.platforms[i];
 
@@ -687,12 +681,14 @@ class Game {
         this.player.x = this.player.prevX;
         this.player.y = this.player.prevY;
 
-
+        //game end when left co
         if(this.player.isCollidedWithLeft(this.platformManager.platforms[i])) {
-
-          this.player.x = this.collidedPlatform.x - 64;
-          this.player.velocityY = -10 + -(this.aceleration * 4);
-          this.player.velocityX = -20 + -(this.aceleration * 4);
+          this.gamePlaying = false;
+          // future feature: to survive when is collide with left.
+          // console.log('isCollidedWithLeft')
+          // this.player.x = this.collidedPlatform.x - 64;
+          // this.player.velocityY = -10 + -(this.aceleration * 4);
+          // this.player.velocityX = -20 + -(this.aceleration * 4);
         } else {
 
           if (this.dragging || this.keys.SPACE || this.keys.UP || this.keys.W) {
@@ -958,48 +954,6 @@ module.exports = Cat;
 /* 11 */
 /***/ (function(module, exports) {
 
-class Sound {
-  constructor(){
-    this.bgSoundTag = document.getElementById('bg-sound');
-    this.bgSound = new Audio('./assets/sounds/bg.ogg');
-  }
-  toggleSound(e){
-    this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
-    const [originText1, originText2] = this.bgSoundTag.innerText.split(' ');
-    originText2 === 'On' ? (this.bgSoundTag.innerText = originText1.concat(' ','Off')) : (this.bgSoundTag.innerText = originText1.concat(' ','On'));
-  }
-}
-
-module.exports = Sound;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-class LevelHandler{
-  constructor({menu, game}){
-    this.easy = document.getElementById("level-easy");
-    this.medium = document.getElementById("level-medium");
-    this.hard = document.getElementById("level-hard");
-    this.menu = menu;
-    this.game = game;
-  }
-  setLevel(e){
-    this.menu.style.display = "none";
-    this.game.level = e.currentTarget.value;
-    this.game.start();
-  }
-
-}
-
-module.exports = LevelHandler;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
 class Score{
   constructor({width, height, time}){
     this.time = time;
@@ -1024,6 +978,48 @@ class Score{
 }
 
 module.exports=Score;
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+class Sound {
+  constructor(){
+    this.bgSoundTag = document.getElementById('bg-sound');
+    this.bgSound = new Audio('./assets/sounds/bg.ogg');
+  }
+  toggleSound(e){
+    this.bgSound.paused ? this.bgSound.play() : this.bgSound.pause();
+    const [originText1, originText2] = this.bgSoundTag.innerText.split(' ');
+    originText2 === 'On' ? (this.bgSoundTag.innerText = originText1.concat(' ','Off')) : (this.bgSoundTag.innerText = originText1.concat(' ','On'));
+  }
+}
+
+module.exports = Sound;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+class LevelHandler{
+  constructor({menu, game}){
+    this.easy = document.getElementById("level-easy");
+    this.medium = document.getElementById("level-medium");
+    this.hard = document.getElementById("level-hard");
+    this.menu = menu;
+    this.game = game;
+  }
+  setLevel(e){
+    this.menu.style.display = "none";
+    this.game.level = e.currentTarget.value;
+    this.game.start();
+  }
+
+}
+
+module.exports = LevelHandler;
 
 
 /***/ })
