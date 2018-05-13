@@ -72,5 +72,5 @@ This project will be implemented with the following technologies:
 
 There are many directions this cellular automata engine could eventually go.  Some anticipated updates are:
 
-- [ ] Add options for difficulties
+- [x] Add options for difficulties
 - [x] Add multiple theme for difficulties
